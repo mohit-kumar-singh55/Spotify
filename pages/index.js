@@ -10,7 +10,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=''>
+      <main className='flex'>
         <Sidebar />
         <Center />
       </main>
