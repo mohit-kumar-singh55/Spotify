@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import { isConstructorDeclaration } from "typescript";
 import spotifyApi, { LOGIN_URL } from "../../../lib/spotify";
 
 async function refreshAccessToken(token) {
@@ -47,7 +48,8 @@ export default NextAuth({
                     accessToken: account.access_token,
                     refreshToken: account.refresh_token,
                     username: account.providerAccountId,
-                    accessTokenExpires: account.expires_at * 1000
+                    accessTokenExpires: account.expires_at * 1000,
+                    image: user.image
                 }
             }
 
@@ -63,6 +65,7 @@ export default NextAuth({
             session.user.accessToken = token.accessToken
             session.user.refreshToken = token.refreshToken
             session.user.username = token.username
+            session.user.image = token.picture
 
             return session;
         }
