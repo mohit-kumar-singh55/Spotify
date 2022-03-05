@@ -20,7 +20,7 @@ async function refreshAccessToken(token) {
     catch (e) {
         return {
             ...token,
-            error: 'REFRESH ACCESS TOKEN'
+            error: 'RefreshAccessTokenError'
         }
     }
 }
