@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Center from '../components/Center';
 import Sidebar from "../components/Sidebar";
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
 
       <main className=''>
         <Sidebar />
-        {/* <Center /> */}
+        <Center />
       </main>
 
       <div>
