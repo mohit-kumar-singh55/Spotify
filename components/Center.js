@@ -1,30 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, PlayIcon } from "@heroicons/react/outline";
 import { shuffle } from "lodash";
-import { playlistIdState } from '../atoms/playlistAtom';
-import { useRecoilValue } from 'recoil';
+import { playlistIdState, playlistState } from '../atoms/playlistAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import useSpotify from "../hooks/useSpotify";
+
+const colors = [
+    "from-purple-500",
+    "from-pink-500",
+    "from-blue-500",
+    "from-green-500",
+    "from-red-500",
+    "from-cyan-500",
+    "from-violet-500",
+    "from-orange-500",
+    "from-yellow-500",
+]
 
 const Center = () => {
     const { data: session } = useSession();
     const [color, setColor] = useState(null);
     const playlistId = useRecoilValue(playlistIdState);
+    const [playlist, setPlaylist] = useRecoilState(playlistState);
+    const spotifyApi = useSpotify();
 
-    const colors = [
-        "from-purple-500",
-        "from-pink-500",
-        "from-blue-500",
-        "from-green-500",
-        "from-red-500",
-        "from-cyan-500",
-        "from-violet-500",
-        "from-orange-500",
-        "from-yellow-500",
-    ]
 
     useEffect(() => {
         setColor(shuffle(colors).pop());
     }, [playlistId])
+
+    useEffect(() => {
+        spotifyApi.getPlaylist(playlistId).then((data) => {
+            setPlaylist(data.body)
+        }).catch((err) => console.log("Something went Wrong!", err))
+    }, [spotifyApi, playlistId])
+
+    console.log(playlist);
 
 
     return (
