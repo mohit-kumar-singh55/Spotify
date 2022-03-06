@@ -17,8 +17,6 @@ const Sidebar = () => {
         }
     }, [session, spotifyApi])
 
-    console.log(playList);
-
 
     return (
         <div className='text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen'>
@@ -55,7 +53,7 @@ const Sidebar = () => {
 
                 {/* Playlists */}
                 {playList.map((playList) => (
-                    <p className='cursor-pointer hover:text-white'>{playList.name}</p>
+                    <p key={playList.name} className='cursor-pointer hover:text-white'>{playList.name}</p>
                 ))}
             </div>
         </div>
