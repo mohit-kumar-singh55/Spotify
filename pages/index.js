@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Center from '../components/Center';
 import Sidebar from "../components/Sidebar";
 import Player from "../components/Player";
+import Alert from '../components/Alert';
 
 const Home = () => {
   return (
@@ -11,6 +12,9 @@ const Home = () => {
         <title>Spotify</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* Alert for notifying that only premium users can play music */}
+      <Alert />
 
       <main className='flex'>
         <Sidebar />

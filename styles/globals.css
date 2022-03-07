@@ -21,3 +21,17 @@ html {
         @apply h-5 w-5 cursor-pointer hover:scale-125 transition transform duration-300 ease-out;
     }
 }
+
+.alert {
+    position: absolute;
+    width: fit-content;
+    background-color: #a855f7;
+    padding: 20px;
+    border-radius: 100px;
+    font-weight: bold;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25px;
+    transition: 0.3s ease-in-out;
+    cursor: default;
+}
