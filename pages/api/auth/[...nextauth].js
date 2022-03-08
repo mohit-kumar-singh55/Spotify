@@ -47,8 +47,7 @@ export default NextAuth({
                     accessToken: account.access_token,
                     refreshToken: account.refresh_token,
                     username: account.providerAccountId,
-                    accessTokenExpires: account.expires_at * 1000,
-                    image: user.image                       // added
+                    accessTokenExpires: account.expires_at * 1000
                 }
             }
 
@@ -64,7 +63,6 @@ export default NextAuth({
             session.user.accessToken = token.accessToken
             session.user.refreshToken = token.refreshToken
             session.user.username = token.username
-            session.user.image = token.picture                  // added
 
             return session;
         }
