@@ -19,7 +19,7 @@ const Song = ({ order, track }) => {
     }
 
     useEffect(() => {
-        document.title = `${track?.track?.artists?.[0]?.name} | Spotify`
+        document.title = `${track?.track?.name} | Spotify`
     }, [])
 
     return (
