@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useSpotify from "../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../lib/time";
 import { useRecoilState } from "recoil";
@@ -16,11 +16,9 @@ const Song = ({ order, track }) => {
         spotifyApi.play({
             uris: [track.track.uri],
         })
-    }
 
-    useEffect(() => {
-        document.title = `${track?.track?.name} | Spotify`
-    }, [track?.track])
+        document.title = `${track?.track?.name} | Spotify`;
+    }
 
     return (
         <div onClick={playSong} className='grid grid-cols-2 text-gray-500 py-4 px-5 cursor-pointer hover:bg-gray-900 rounded-lg duration-300'>
