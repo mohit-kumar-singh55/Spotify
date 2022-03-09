@@ -20,7 +20,7 @@ const Song = ({ order, track }) => {
 
     useEffect(() => {
         document.title = `${track?.track?.name} | Spotify`
-    }, [])
+    }, [track?.track?.name])
 
     return (
         <div onClick={playSong} className='grid grid-cols-2 text-gray-500 py-4 px-5 cursor-pointer hover:bg-gray-900 rounded-lg duration-300'>
