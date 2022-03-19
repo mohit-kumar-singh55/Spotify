@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import { useRecoilState } from "recoil";
 import { Dialog, Transition } from "@headlessui/react";
 import { showModalState } from "../atoms/modalAtom";
 import { SearchIcon } from "@heroicons/react/outline";
 import Song from './Song';
 import { useSession } from 'next-auth/react';
+import { debounce } from 'lodash';
 
 const Modal = () => {
     const [open, setOpen] = useRecoilState(showModalState);
@@ -13,17 +14,33 @@ const Modal = () => {
     const { data: session } = useSession();
 
     useEffect(async () => {
-        let url = `https://api.spotify.com/v1/search?q=${search}&type=track`;
-        const res = await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json',
-                "Accept": "application/json",
-                "Authorization": "Bearer " + session.user.accessToken
-            },
-        });
-        const data = res.json();
-        await data.then(res => setSongs(res))
+        if (search) debouncedSearch(search);
     }, [search])
+
+    const debouncedSearch = useCallback(
+        debounce((search) => {
+            fetchSearchResult(search);
+        }, 500),            // delay, waits for event to stop
+        []
+    )
+
+    const fetchSearchResult = async (search) => {
+        try {
+            let url = `https://api.spotify.com/v1/search?q=${search}&type=track`;
+            const res = await fetch(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + session.user.accessToken
+                },
+            });
+            const data = res.json();
+            await data.then(res => setSongs(res));
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 
     return (
         <Transition.Root show={open} as={Fragment}>
