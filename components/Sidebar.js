@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import useSpofity from "../hooks/useSpotify";
 import { useRecoilState } from 'recoil';
 import { playlistIdState } from "../atoms/playlistAtom";
+import Link from 'next/link';
 
 const Sidebar = () => {
     const { data: session, status } = useSession();
@@ -24,15 +25,17 @@ const Sidebar = () => {
     return (
         <div className='text-gray-500 p-5 text-xs lg:text-sm sm:max-w-[12rem pb-36] lg:max-w-[15rem] hidden md:inline-flex border-r border-gray-900 overflow-y-scroll h-screen'>
             <div className='space-y-4'>
-                <button className='flex items-center space-x-2 hover:text-white'>
-                    <HomeIcon className="h-5 w-5" />
-                    <p>Home</p>
-                </button>
+                <Link href="/">
+                    <button className='flex items-center space-x-2 hover:text-white'>
+                        <HomeIcon className="h-5 w-5" />
+                        <p>Home</p>
+                    </button>
+                </Link>
                 <button className='flex items-center space-x-2 hover:text-white'>
                     <SearchIcon className="h-5 w-5" />
                     <p>Search</p>
                 </button>
-                <button className='flex items-center space-x-2 hover:text-white'>
+                <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
                     <LibraryIcon className="h-5 w-5" />
                     <p>Your Library</p>
                 </button>
@@ -47,7 +50,7 @@ const Sidebar = () => {
                     <HeartIcon className="h-5 w-5" />
                     <p>Liked Songs</p>
                 </button>
-                <button className='flex items-center space-x-2 hover:text-white'>
+                <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
                     <RssIcon className="h-5 w-5" />
                     <p>Your episodes</p>
                 </button>
