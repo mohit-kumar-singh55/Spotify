@@ -25,50 +25,56 @@ const Sidebar = () => {
 
 
     return (
-        <div className='text-gray-500 p-5 text-xs lg:text-sm sm:max-w-[12rem pb-36] lg:max-w-[15rem] hidden md:inline-flex border-r border-gray-900 overflow-y-scroll h-screen'>
-            <div className='space-y-4'>
-                <Link href="/">
-                    <button className='flex items-center space-x-2 hover:text-white'>
-                        <HomeIcon className="h-5 w-5" />
-                        <p>Home</p>
+        <>
+            <div className='text-gray-500 p-5 text-xs lg:text-sm sm:max-w-[12rem] pb-36 lg:max-w-[15rem] hidden md:inline-flex border-r border-gray-900 overflow-y-scroll h-screen'>
+                <div className='space-y-4'>
+                    <Link href="/">
+                        <button className='flex items-center space-x-2 hover:text-white'>
+                            <HomeIcon className="h-5 w-5" />
+                            <p>Home</p>
+                        </button>
+                    </Link>
+                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
+                        <SearchIcon className="h-5 w-5" />
+                        <p>Search</p>
                     </button>
-                </Link>
-                <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
-                    <SearchIcon className="h-5 w-5" />
-                    <p>Search</p>
-                </button>
-                <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
-                    <LibraryIcon className="h-5 w-5" />
-                    <p>Your Library</p>
-                </button>
+                    <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
+                        <LibraryIcon className="h-5 w-5" />
+                        <p>Your Library</p>
+                    </button>
 
-                <hr className='border-t-[0.1px] border-gray-900' />
+                    <hr className='border-t-[0.1px] border-gray-900' />
 
-                <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
-                    <PlusCircleIcon className="h-5 w-5" />
-                    <p>Create Playlist</p>
-                </button>
-                <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
-                    <HeartIcon className="h-5 w-5" />
-                    <p>Liked Songs</p>
-                </button>
-                <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
-                    <RssIcon className="h-5 w-5" />
-                    <p>Your episodes</p>
-                </button>
+                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
+                        <PlusCircleIcon className="h-5 w-5" />
+                        <p>Create Playlist</p>
+                    </button>
+                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
+                        <HeartIcon className="h-5 w-5" />
+                        <p>Liked Songs</p>
+                    </button>
+                    <button className='flex items-center space-x-2 hover:text-white disabled:text-gray-700' disabled>
+                        <RssIcon className="h-5 w-5" />
+                        <p>Your episodes</p>
+                    </button>
 
-                <hr className='border-t-[0.1px] border-gray-900' />
+                    <hr className='border-t-[0.1px] border-gray-900' />
 
-                {/* Playlists */}
-                {playList.map((playList) => (
-                    <p key={playList.name}
-                        className='cursor-pointer hover:text-white'
-                        onClick={() => setPlaylistId(playList.id)}>
-                        {playList.name}
-                    </p>
-                ))}
+                    {/* Playlists */}
+                    {playList.map((playList) => (
+                        <p key={playList.name}
+                            className='cursor-pointer hover:text-white'
+                            onClick={() => setPlaylistId(playList.id)}>
+                            {playList.name}
+                        </p>
+                    ))}
+                </div>
             </div>
-        </div>
+
+            <button onClick={() => setOpen(true)} className='md:hidden lg:hidden xl:hidden inline-block absolute bg-black rounded-full text-gray-500 p-2 top-5 left-6'>
+                <SearchIcon className='w-8 h-8' />
+            </button>
+        </>
     )
 }
 
