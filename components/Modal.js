@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useRecoilState } from "recoil";
 import { Dialog, Transition } from "@headlessui/react";
 import { showModalState } from "../atoms/modalAtom";
@@ -6,10 +6,26 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { useRecoilValue } from 'recoil';
 import { playlistState } from '../atoms/playlistAtom';
 import Song from './Song';
+import { useSession } from 'next-auth/react';
 
 const Modal = () => {
     const [open, setOpen] = useRecoilState(showModalState);
     const playlist = useRecoilValue(playlistState);
+    const [songs, setSongs] = useState({});
+    const { data: session } = useSession();
+
+    useEffect(async () => {
+        let url = "https://api.spotify.com/v1/search?q=summertime&type=track";
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "application/json",
+                "Authorization": "Bearer " + session.user.accessToken
+            },
+        });
+        const data = res.json();
+        await data.then(res => setSongs(res))
+    }, [])
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -52,8 +68,11 @@ const Modal = () => {
                                 </div>
 
                                 <div className='text-white px-8 flex flex-col mt-5 space-y-1 pb-28'>
-                                    {playlist?.tracks?.items.map((track, i) => (
-                                        <Song key={track.track.id} order={i + 1} track={track} />
+                                    {songs?.tracks?.items.map((track, i) => (
+                                        <Song key={track.id} order={i + 1} track={track}>
+                                            {console.log(track)}
+                                        </Song>
+
                                     ))}
                                 </div>
                             </div>
