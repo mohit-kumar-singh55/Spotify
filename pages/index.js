@@ -4,6 +4,7 @@ import Center from '../components/Center';
 import Sidebar from "../components/Sidebar";
 import Player from "../components/Player";
 import Alert from '../components/Alert';
+import Modal from '../components/Modal';
 
 const Home = () => {
   return (
@@ -24,6 +25,8 @@ const Home = () => {
       <div className='sticky bottom-0'>
         <Player />
       </div>
+
+      <Modal />
 
     </div>
   )
