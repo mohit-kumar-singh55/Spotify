@@ -3,19 +3,17 @@ import { useRecoilState } from "recoil";
 import { Dialog, Transition } from "@headlessui/react";
 import { showModalState } from "../atoms/modalAtom";
 import { SearchIcon } from "@heroicons/react/outline";
-import { useRecoilValue } from 'recoil';
-import { playlistState } from '../atoms/playlistAtom';
 import Song from './Song';
 import { useSession } from 'next-auth/react';
 
 const Modal = () => {
     const [open, setOpen] = useRecoilState(showModalState);
-    const playlist = useRecoilValue(playlistState);
     const [songs, setSongs] = useState({});
+    const [search, setSearch] = useState("")
     const { data: session } = useSession();
 
     useEffect(async () => {
-        let url = "https://api.spotify.com/v1/search?q=summertime&type=track";
+        let url = `https://api.spotify.com/v1/search?q=${search}&type=track`;
         const res = await fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +23,7 @@ const Modal = () => {
         });
         const data = res.json();
         await data.then(res => setSongs(res))
-    }, [])
+    }, [search])
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -64,17 +62,15 @@ const Modal = () => {
                             <div>
                                 <div className='relative flex items-center'>
                                     <SearchIcon className='absolute w-5 h-5 text-gray-400 left-3' />
-                                    <input type="search" placeholder='Search for music...' className='w-full bg-transparent rounded-full border-gray-400 border px-8 pl-10 py-3 focus:ring-gray-50 transition-all duration-200' />
+                                    <input type="search" placeholder='Search for music...' value={search} onChange={(e) => setSearch(e.target.value)} className='w-full bg-transparent rounded-full border-gray-400 border px-8 pl-10 py-3 focus:ring-gray-50 transition-all duration-200' />
                                 </div>
 
-                                <div className='text-white px-8 flex flex-col mt-5 space-y-1 pb-28'>
+                                {search && <div className='text-white px-8 flex flex-col mt-5 space-y-1 pb-28'>
                                     {songs?.tracks?.items.map((track, i) => (
-                                        <Song key={track.id} order={i + 1} track={track}>
-                                            {console.log(track)}
-                                        </Song>
+                                        <Song key={track.id} order={i + 1} track={track} />
 
                                     ))}
-                                </div>
+                                </div>}
                             </div>
                         </div>
                     </Transition.Child>
