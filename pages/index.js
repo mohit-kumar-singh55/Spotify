@@ -14,7 +14,7 @@ const Home = () => {
       </Head>
 
       {/* Alert for notifying that only premium users can play music */}
-      <Alert />
+      <Alert alert="Note: As per Spotify, Only premium users can play music!" />
 
       <main className='flex'>
         <Sidebar />

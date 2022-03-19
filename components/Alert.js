@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Alert = () => {
+const Alert = ({ alert }) => {
     const [showAlert, setShowAlert] = useState(true);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const Alert = () => {
     return (
         <>
             {showAlert && <div className='text-white alert'>
-                Note: As per Spotify, Only premium users can play music!
+                {alert}
             </div>}
         </>
     )
