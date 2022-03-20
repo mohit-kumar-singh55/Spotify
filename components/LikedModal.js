@@ -3,10 +3,18 @@ import { useRecoilState } from "recoil";
 import { Dialog, Transition } from "@headlessui/react";
 import { showLikedModalState } from "../atoms/modalAtom";
 import Song from './Song';
+import useSpotify from "../hooks/useSpotify";
 
 const LikedModal = () => {
+    const spotifyApi = useSpotify();
     const [open, setOpen] = useRecoilState(showLikedModalState);
     const [songs, setSongs] = useState([]);
+
+    useEffect(() => {
+        spotifyApi.getMySavedTracks().then((res) => {
+            setSongs(res?.body?.items);
+        }).catch((err) => console.log(err));
+    }, [])
 
 
     return (
@@ -44,13 +52,17 @@ const LikedModal = () => {
                     >
                         <div className='inline-block overflow-y-scroll align-middle bg-[#282828] text-white rounded-xl px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all h-fit max-h-[650px] lg:max-w-5xl md:max-w-3xl sm:my-8 sm:align-middle sm:w-full sm:p-6 sm:max-w-2xl'>
                             <div>
-                                <p>Liked Songs</p>
-                                {/* {search && <div className='text-white px-8 flex flex-col mt-5 space-y-1 pb-28'>
-                                    {songs?.tracks?.items.map((track, i) => (
-                                        <Song key={track.id} order={i + 1} track={track} />
-
-                                    ))}
-                                </div>} */}
+                                {songs.length !== 0 ? (
+                                    <div className='text-white px-2 flex flex-col space-y-1'>
+                                        {songs?.map((tracks, i) => (
+                                            <Song key={tracks.track.id} order={i + 1} track={tracks.track} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className='px-8 text-gray-400 text-center font-semibold text-lg'>
+                                        <p>You don't have any liked song!</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </Transition.Child>
