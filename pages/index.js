@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Player from "../components/Player";
 import Alert from '../components/Alert';
 import Modal from '../components/Modal';
+import LikedModal from '../components/LikedModal';
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
       </div>
 
       <Modal />
+      <LikedModal />
 
     </div>
   )

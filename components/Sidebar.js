@@ -5,13 +5,14 @@ import useSpofity from "../hooks/useSpotify";
 import { useRecoilState } from 'recoil';
 import { playlistIdState } from "../atoms/playlistAtom";
 import Link from 'next/link';
-import { showModalState } from "../atoms/modalAtom";
+import { showModalState, showLikedModalState } from "../atoms/modalAtom";
 
 const Sidebar = () => {
     const { data: session, status } = useSession();
     const [playList, setPlayList] = useState([]);
     const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
     const [open, setOpen] = useRecoilState(showModalState);
+    const [likedOpen, setLikedOpen] = useRecoilState(showLikedModalState);
 
     const spotifyApi = useSpofity();
 
@@ -45,11 +46,7 @@ const Sidebar = () => {
 
                     <hr className='border-t-[0.1px] border-gray-900' />
 
-                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
-                        <PlusCircleIcon className="h-5 w-5" />
-                        <p>Create Playlist</p>
-                    </button>
-                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setOpen(true)}>
+                    <button className='flex items-center space-x-2 hover:text-white' onClick={() => setLikedOpen(true)}>
                         <HeartIcon className="h-5 w-5" />
                         <p>Liked Songs</p>
                     </button>
