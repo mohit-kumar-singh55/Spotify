@@ -48,17 +48,26 @@ const Center = () => {
                 </div>
             </header>
 
-            <section className={`flex items-end space-x-7 bg-gradient-to-b ${color} to-black h-80 text-white p-8`}>
-                <img className='w-44 h-44 shadow-2xl' src={playlist?.images?.[0]?.url} alt="img" />
-                <div>
-                    <p>PLAYLIST</p>
-                    <h1 className='text-2xl md:text-3xl xl:text-5xl font-bold'>{playlist?.name}</h1>
-                </div>
-            </section>
+            {playlist ? (
+                <>
+                    <section className={`flex items-end space-x-7 bg-gradient-to-b ${color} to-black h-80 text-white p-8`}>
+                        <img className='w-44 h-44 shadow-2xl' src={playlist?.images?.[0]?.url} alt="img" />
+                        <div>
+                            <p>PLAYLIST</p>
+                            <h1 className='text-2xl md:text-3xl xl:text-5xl font-bold'>{playlist?.name}</h1>
+                        </div>
+                    </section>
 
-            <div>
-                <Songs />
-            </div>
+                    <div>
+                        <Songs />
+                    </div>
+                </>
+            ) : (
+                <div className="flex flex-col items-center justify-center font-semibold text-xl h-screen text-gray-400">
+                    <p>Please select a playlist!</p>
+                    <p>Search for the songs or create a playlist</p>
+                </div>
+            )}
         </div>
     )
 }
