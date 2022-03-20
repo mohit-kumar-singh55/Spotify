@@ -68,9 +68,10 @@ const Sidebar = () => {
                 </div>
             </div>
 
-            <button onClick={() => setOpen(true)} className='md:hidden lg:hidden xl:hidden inline-block absolute bg-black rounded-full text-gray-500 p-2 top-5 left-6'>
-                <SearchIcon className='w-8 h-8' />
-            </button>
+            <div className='md:hidden lg:hidden xl:hidden flex gap-5 absolute text-gray-500 bg-black rounded-full p-2 top-5 left-6'>
+                <SearchIcon onClick={() => setOpen(true)} className='w-8 h-8 hover:text-white transition duration-200 cursor-pointer' />
+                <HeartIcon onClick={() => setLikedOpen(true)} className='w-8 h-8 hover:text-white transition duration-200 cursor-pointer' />
+            </div>
         </>
     )
 }

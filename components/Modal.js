@@ -82,7 +82,7 @@ const Modal = () => {
                                     <input type="search" placeholder='Search for music...' value={search} onChange={(e) => setSearch(e.target.value)} className='w-full bg-transparent rounded-full border-gray-400 border px-8 pl-10 py-3 focus:ring-gray-50 transition-all duration-200' />
                                 </div>
 
-                                {search && <div className='text-white px-8 flex flex-col mt-5 space-y-1'>
+                                {search && <div className='text-white px-2 flex flex-col mt-5 space-y-1'>
                                     {songs?.tracks?.items.map((track, i) => (
                                         <Song key={track.id} order={i + 1} track={track} />
                                     ))}

@@ -65,7 +65,7 @@ const Center = () => {
             ) : (
                 <div className="flex flex-col items-center justify-center font-semibold text-xl h-screen text-gray-400">
                     <p>Please select a playlist!</p>
-                    <p>Search for the songs to play</p>
+                    <p>Search for the songs or play the liked ones</p>
                 </div>
             )}
         </div>
