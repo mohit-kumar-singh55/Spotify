@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HomeIcon, SearchIcon, LibraryIcon, HeartIcon, RssIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import useSpofity from "../hooks/useSpotify";
@@ -61,11 +61,11 @@ const Sidebar = () => {
                     <hr className='border-t-[0.1px] border-gray-900' />
 
                     {/* Playlists */}
-                    {playList.map((playList) => (
-                        <p key={playList.name}
+                    {playList?.map((playList, index) => (
+                        <p key={index}
                             className='cursor-pointer hover:text-white'
-                            onClick={() => setPlaylistId(playList.id)}>
-                            {playList.name}
+                            onClick={() => setPlaylistId(playList?.id)}>
+                            {playList?.name}
                         </p>
                     ))}
                 </div>
