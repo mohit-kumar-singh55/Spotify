@@ -12,7 +12,7 @@ const Alert = ({ alert }) => {
 
     return (
         <>
-            {showAlert && <div className='text-white alert'>
+            {showAlert && <div className='text-white alert text-center'>
                 {alert}
             </div>}
         </>
